@@ -2416,7 +2416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 1551713708}
-  sensitive: 5
+  sensitive: 30
 --- !u!1 &978905563
 GameObject:
   m_ObjectHideFlags: 0
@@ -3547,14 +3547,14 @@ MonoBehaviour:
   air_accelerate: 1
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   playerHeight: 2
   isSurfing: 0
   radiusOfSphereCast: 1
   maxDistance: 2
   layerMaskSurf:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 128
   slow: 1
 --- !u!54 &1551713711
 Rigidbody:

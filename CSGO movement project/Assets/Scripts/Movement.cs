@@ -11,31 +11,48 @@ public class Movement : MonoBehaviour
     
     public Rigidbody rb;
     [Header("Movment Setting")]
-    public float friction;
-    public float ground_accelerate;
-    public float max_velocity_ground;
-    public float AirStrafeForce;
-    public float max_velocity_air;
-    public float jumpForce;
+    [SerializeField]
+    private float friction;
+    [SerializeField]
+    private float ground_accelerate;
+    [SerializeField]
+    private float max_velocity_ground;
+    [SerializeField]
+    private float AirStrafeForce;
+    [SerializeField]
+    private float max_velocity_air;
+    [SerializeField]
+    private float jumpForce;
 
     [Header("------")]
-    public Vector3 gravity;
-    public Transform orientation;
-    public float groundDrag;
+    [SerializeField]
+    private Vector3 gravity;
+    [SerializeField]
+    private Transform orientation;
+    [SerializeField]
+    private float groundDrag;
 
     [Header("Player on air")]
-    public bool isGrounded;
-    public float air_accelerate;
-    public LayerMask whatIsGround;
-    public float playerHeight;
+    [SerializeField]
+    private bool isGrounded;
+    [SerializeField]
+    private float air_accelerate;
+    [SerializeField]
+    private LayerMask whatIsGround;
+    [SerializeField]
+    private float playerHeight;
 
     [Header("Player Surfing")]
-    public bool isSurfing;
-    public float radiusOfSphereCast;
-    public float maxDistance;
-    public LayerMask layerMaskSurf;
-
-    public float slow;
+    [SerializeField]
+    private bool isSurfing;
+    [SerializeField]
+    private float radiusOfSphereCast;
+    [SerializeField]
+    private float maxDistance;
+    [SerializeField]
+    private LayerMask layerMaskSurf;
+    [SerializeField]
+    private float slow;
 
     Vector3 moveDirection;
     Vector3 moveVector;
@@ -44,14 +61,13 @@ public class Movement : MonoBehaviour
 
     public void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
     public void Update()
     {
        MoveVector();
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-        Physics.gravity = gravity;
-
+       
 
     }
 
@@ -110,11 +126,11 @@ public class Movement : MonoBehaviour
     void MoveVector()
     {
         Vector2 move = playerControls.Land.Move.ReadValue<Vector2>();
-        moveVector = new Vector3(move.x, move.y, 0);
+        moveVector = new Vector3(move.x, 0, move.y);
     }
     private void MovePlayer()
     {
-        moveDirection = orientation.forward * moveVector.y + orientation.right * moveVector.x;
+        moveDirection = orientation.forward * moveVector.z + orientation.right * moveVector.x;
         if (isGrounded)
               MoveGround(moveDirection.normalized, rb.velocity);
         else
